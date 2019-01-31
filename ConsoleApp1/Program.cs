@@ -4,18 +4,37 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Program.cs
+namespace ConsoleApp39
 {
     class Program
     {
         static void Main(string[] args)
         {
+            Countryside Ontario = new Countryside();
+            Ontario.run();
 
         }
     }
 
-    class Village
+    class LearningExample
+    {
+        public void run()
+        {
+            Village Toronto;
+            Village a;
+            Village b;
+            Toronto = new Village();
+            a = Toronto;
 
+            Toronto = new Village();
+            b = Toronto;
+
+            if (a == b) { Console.WriteLine("same"); }
+            else
+            { Console.WriteLine("different obj refs"); }
+        }
+    }
+    class Village
     {
         public static int numberOfVillages = 0;
         public Village nextVillage;
@@ -23,7 +42,7 @@ namespace Program.cs
         public string VillageName;
         public bool isAstrildeHere = false;
 
-        private Village()
+        public Village()
         {
             Village.numberOfVillages++;
         }
@@ -34,26 +53,56 @@ namespace Program.cs
         public Village Maple;
         public Village Toronto;
         public Village Ajax;
+        public Village Head;
+        public Village Tail;
+        public Village Current;
+
+        public void run()
+        {
+            this.MapInitializer();
+            this.LookForAstrilde();
+            Console.WriteLine("Hugi found Astrilde in " + Current.VillageName);
+        }
 
         public void MapInitializer()
         {
+            Ajax = new Village();
+            Toronto = new Village();
             Maple = new Village();
+
             Maple.VillageName = "Maple";
             Maple.previousVillage = null;
             Maple.nextVillage = Toronto;
-            Toronto = new Village();
-            Toronto.VillageName = "Toronto";
+            Ajax.isAstrildeHere = true;
+
             Toronto.previousVillage = Maple;
+            Toronto.VillageName = "Toronto";
             Toronto.nextVillage = Ajax;
-            Ajax = new Village();
+
             Ajax.VillageName = "Ajax";
             Ajax.nextVillage = null;
-            Ajax.isAstrildeHere = true;
+            Ajax.previousVillage = Toronto;
+
         }
+        public void LookForAstrilde()
+        {
+            Current = Maple;
+            {
+                if (Current.isAstrildeHere)
+                {
+                    Console.WriteLine("Found Astrilde");
+                    return;
+                }
+                else
+                {
+                    Current = Current.nextVillage;
+                    Console.ReadLine();
 
-        public void LookForAstr
+                }
+
+            }
+        }
     }
-
 }
 
 
